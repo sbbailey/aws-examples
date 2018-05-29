@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="sbbailey">
+
+    <title>Microservices Test Page</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- Bootstrap theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <!-- font awesome -->
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300i,400,600,700" rel="stylesheet">
+
+    
+
+	<style>
+        
+    </style>
+
+</head>
+<body style="background-color: #cccccc;margin-top: 40px;font-family: Open Sans, sans-serif;">
+
+	<div class="wrapper">
+		<div class="wrapper container">
+			<div class="row" style="margin-bottom: 15px;">
+				<div class="col-md-4"></div>
+				<div class="col-md-4"><h2>Microservices Test Page</h2></div>
+			</div>
+			<div class="row">
+				<div class="col-md-6" style="text-align: center;"><h4>Example Requests</h4></div>
+				<div class="col-md-6" style="text-align: center;"><h4>Request Result</h4></div>
+			</div>
+			<div class="row">
+				<div class="col-md-6" style="text-align: center;">
+					<button class="btn btn-primary" onclick="getAjax()">Get</button>
+					<button class="btn btn-primary" onclick="postAjax()">Post</button>
+				</div>
+				<div class="col-md-6" style="text-align: left;background-color: #fff;min-height: 400px;"><div id="result" style="font-family: monospace;white-space: pre;font-size: 10px;padding: 15px;"></div></div>
+			</div>
+		</div>
+	</div>
+
+
+
+	<!-- Jquery and Bootstrap JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+	<script>
+		var apiUrl = "http://localhost:8080/v1/api/banking/";
+
+		function getAjax(){
+			$('#result').empty();
+
+			$.get(apiUrl + "getaccountbyname/tester", function(data) {
+				console.log(data);
+				$('#result').html(JSON.stringify(data, null, 4));
+			},"json");
+
+		}
+		
+		function postAjax(){
+			$('#result').empty();
+
+			$.post(apiUrl + "createaccount", {name: "Frodo", opbal:"22.50"}, function(data) {
+				console.log(data);
+				$('#result').html(JSON.stringify(data, null, 4));
+			},"json");
+
+		}
+	</script>
+</body>
+</html>
+
